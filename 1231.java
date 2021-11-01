@@ -36,7 +36,7 @@ class Solution {
             }
         }
         
-        // Once the left and right boundaries coincide, we find the target value,
+        // Once the left and right boundaries coincide, we find the target value
         // that is, the maximum possible sweetness we can get.
         return right;
     }
