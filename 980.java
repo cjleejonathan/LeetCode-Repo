@@ -1,3 +1,17 @@
+// algorithm pseudo code.
+// def backtrack(cell):
+//         1. if we arrive at the final state:
+//              path_count ++
+//              return
+
+//         2. mark the current cell as visited
+
+//         3. for next_cell in 4 directions:
+//              if next_cell is not visited and non-obstacle:
+//                  backtrack(next_cell)
+
+//         4. unmark the current cell
+
 class Solution {
     int rows, cols;
     int[][] grid;
@@ -67,3 +81,5 @@ class Solution {
         return this.path_count;
     }
 }
+
+
