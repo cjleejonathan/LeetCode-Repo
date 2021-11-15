@@ -22,30 +22,36 @@ class Node {
 */
 
 class Solution {
-    int res = 0;
-    public int diameter(Node root) {
-        getHeight(root);
-        return res;
-    }
-    
-    public int getHeight(Node root) {
-        if (root == null)
+    protected int diameter = 0;
+
+    /**
+     * return the height of the node
+     */
+    protected int height(Node node) {
+        if (node.children.size() == 0)
             return 0;
-        
-        int max1 = 0;
-        int max2 = 0;
-        for (Node child : root.children) {
-            int height = getHeight(child);
-            if (height > max1) {
-                max2 = max1;
-                max1 = height;
-            } else if (height > max2) {
-                max2 = height;
+
+        // select the top two largest heights
+        int maxHeight1 = 0, maxHeight2 = 0;
+        for (Node child : node.children) {
+            int parentHeight = height(child) + 1;
+            if (parentHeight > maxHeight1) {
+                maxHeight2 = maxHeight1;
+                maxHeight1 = parentHeight;
+            } else if (parentHeight > maxHeight2) {
+                maxHeight2 = parentHeight;
             }
+            // calculate the distance between the two farthest leaves nodes.
+            int distance = maxHeight1 + maxHeight2;
+            this.diameter = Math.max(this.diameter, distance);
         }
-        res = Math.max(res, max1 + max2);
-        return max1 + 1;
+
+        return maxHeight1;
     }
-    
-   
+
+    public int diameter(Node root) {
+        this.diameter = 0;
+        height(root);
+        return diameter;
+    }
 }
