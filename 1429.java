@@ -1,7 +1,7 @@
 class FirstUnique {
   
   private Set<Integer> setQueue = new LinkedHashSet<>();
-  private Map<Integer, Boolean> isUnique = new HashMap<>();
+  private Set<Integer> isUnique = new HashSet<>();
   
   public FirstUnique(int[] nums) {
     for (int num : nums) {
@@ -21,13 +21,12 @@ class FirstUnique {
   public void add(int value) {
     // Case 1: This value is not yet in the data structure.
     // It should be ADDED.
-    if (!isUnique.containsKey(value)) {
-      isUnique.put(value, true);
+    if (!isUnique.contains(value)) {
+      isUnique.add(value);
       setQueue.add(value);
     // Case 2: This value has been seen once, so is now becoming
     // non-unique. It should be REMOVED.
-    } else if (isUnique.get(value)) {
-      isUnique.put(value, false);
+    } else {
       setQueue.remove(value);
     }
   }
